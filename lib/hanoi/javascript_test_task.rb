@@ -48,7 +48,8 @@ class JavaScriptTestTask < ::Rake::TaskLib
         end
       end
 
-      @test_builder.teardown
+      # TODO re-enable
+      # @test_builder.teardown
       @server.shutdown
       t.join
     end
@@ -91,6 +92,6 @@ class JavaScriptTestTask < ::Rake::TaskLib
           browser
       end
 
-    @browsers<<browser
+    @browsers << browser
   end
 end

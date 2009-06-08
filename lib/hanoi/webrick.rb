@@ -91,7 +91,7 @@ class NonCachingFileHandler < WEBrick::HTTPServlet::FileHandler
     set_default_content_type(res, req.path)
     prevent_caching(res)
   end
-  
+
   def set_default_content_type(res, path)
     res['Content-Type'] = case path
       when /\.js$/   then 'text/javascript'
