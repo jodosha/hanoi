@@ -8,19 +8,19 @@ class Browser
     require 'rbconfig'
     Config::CONFIG['host']
   end
-  
+
   def macos?
     host.include?('darwin')
   end
-  
+
   def windows?
     host.include?('mswin')
   end
-  
+
   def linux?
     host.include?('linux')
   end
-  
+
   def applescript(script)
     raise "Can't run AppleScript on #{host}" unless macos?
     system "osascript -e '#{script}' 2>&1 >/dev/null"
