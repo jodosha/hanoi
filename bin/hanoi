@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+require "fileutils"
+
+path = ARGV[0] || Dir.pwd
+raise "Unknown path '#{path}'" unless File.directory?(path)
+templates_path = File.expand_path(File.dirname(__FILE__) + "/../templates")
+
+# Rakefile
+FileUtils.cp File.join(templates_path, "fresh_rakefile"), File.join(path, "Rakefile")
+
+# JavaScript test directory
+name = File.directory?(File.join(path, "spec")) ? "spec" : "test"
+path = File.join(path, name, "javascript")
+FileUtils.mkdir_p path
+
+# Assets
+FileUtils.cp_r File.join(templates_path, "assets"), File.join(path)
+
+# Template
+FileUtils.mkdir_p File.join(path, "templates")
+FileUtils.cp File.join(templates_path, "test_case.erb"), File.join(path, "templates")
+
+# Samples
+FileUtils.mkdir_p File.join(path, "fixtures")
+FileUtils.cp File.join(templates_path, "example_fixtures.html"), File.join(path, "fixtures")
+FileUtils.cp File.join(templates_path, "example_test.js"), path
