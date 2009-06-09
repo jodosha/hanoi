@@ -1,0 +1,70 @@
+h1. Automated jQuery tests with QUnit
+
+h2. Installation
+
+  (sudo) gem install jodosha-hanoi -s http://gems.github.com
+  
+h2. Crash Course
+
+  hanoi         # prepare the target directory
+  rake test:js  # run the tests
+
+h2. How To Use
+
+Prepare the target directory, you can use one of the following options:
+
+  hanoi
+  hanoi .
+  hanoi /path/to/project
+
+This command will create the following structure:
+
+  Rakefile
+  test/
+    javascript/
+      assets/
+        jquery.js
+        testrunner.js
+        testsuite.css
+      example_test.js
+      fixtures/
+        example_fixtures.html
+      templates/
+        test_case.erb
+
+You need a valid "Rake":http://rake.rubyforge.org/ installation to run your tests:
+
+  rake test:js
+
+You can specify to run the test against one or more browsers:
+
+  rake test:js BROWSERS=firefox,ie,safari
+
+You can specify to run only certain tests:
+
+  rake test:js TESTS=path/to/first_test.js,path/to/second_test.js
+
+You can combine both @BROWSERS@ and @TESTS@ configurations.
+
+h2. Browsers & Platforms
+
+Platforms:
+#MacOS
+#Windows
+#Linux
+
+Browsers:
+#Firefox
+#Safari
+#Internet Explorer
+#Opera
+#Konqueror
+
+h2. Acknowledgements
+
+The Ruby libraries of Hanoi are a customization of the jsblib.rb, courtesy of the "Prototype":http://prototypejs.org team.
+Hanoi runs a customized version of QUnit, courtesy of the "jQuery":http://jquery.com team.
+
+h2. Copyright
+
+(c) 2009 Luca Guidi - "http://lucaguidi.com":http://lucaguidi.com, released under the MIT license
