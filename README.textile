@@ -32,6 +32,7 @@ You can specify to run only certain tests:
 You can combine both @BROWSERS@ and @TESTS@ configurations.
 
 h2. Structure
+
 The @hanoi@ executable will create the following structure:
 
   Rakefile
@@ -47,7 +48,7 @@ The @hanoi@ executable will create the following structure:
       templates/
         test_case.erb
 
-* @Rakefile@ creates a fresh rakefile, edit it according to your setup
+* @Rakefile@ creates a fresh rakefile, *you have to edit* it according to your setup
 * @test@ Hanoi creates it if missing, otherwise will choose between existing @test@ or @spec@ paths
 * @javascript@ is the root directory of your tests
 * @assets@ contains the jQuery and QUnit source file and a css.
@@ -56,7 +57,7 @@ The @hanoi@ executable will create the following structure:
 * @templates@ contains the template file for your tests. You shouldn't edit it, if you don't know the risk.
 * @fixtures@ contains all the HTML fixtures, each file will be injected into the proper case.
 
-By convention, your @test/javascript@ folder should reflect the structure of your source directory,
+By convention, your @test/javascript@ folder *should reflect* the structure of your source directory,
 appending the @_test.js@ suffix to each test case and the @_fixtures.html@ to each fixture file.
 
 Example:
@@ -80,16 +81,18 @@ Example:
             file_3_fixtures.html
         file_1_fixtures.html
 
-You have probably noticed that @file_2_fixtures.html@ is missing, this because fixtures are optional.
+You have probably noticed that @file_2_fixtures.html@ is missing, this because *fixtures are optional*.
 
 h2. Browsers & Platforms
 
-Platforms:
+h3. Platforms:
+
 * MacOS
 * Windows
 * Linux
 
-Browsers:
+h3. Browsers:
+
 * Firefox
 * Safari
 * Internet Explorer
