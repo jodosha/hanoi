@@ -8,7 +8,6 @@ templates_path = File.expand_path(File.dirname(__FILE__) + "/../templates")
 # Rakefile
 File.open(File.join(path, "Rakefile"), "a") { |f| f.write(File.readlines(File.join(templates_path, "fresh_rakefile")))}
 
-
 # JavaScript test directory
 name = File.directory?(File.join(path, "spec")) ? "spec" : "test"
 path = File.join(path, name, "javascript")
