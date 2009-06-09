@@ -49,20 +49,21 @@ You can combine both @BROWSERS@ and @TESTS@ configurations.
 h2. Browsers & Platforms
 
 Platforms:
-#MacOS
-#Windows
-#Linux
+  # MacOS
+  # Windows
+  # Linux
 
 Browsers:
-#Firefox
-#Safari
-#Internet Explorer
-#Opera
-#Konqueror
+  # Firefox
+  # Safari
+  # Internet Explorer
+  # Opera
+  # Konqueror
 
 h2. Acknowledgements
 
 The Ruby libraries of Hanoi are a customization of the jsblib.rb, courtesy of the "Prototype":http://prototypejs.org team.
+
 Hanoi runs a customized version of QUnit, courtesy of the "jQuery":http://jquery.com team.
 
 h2. Copyright
