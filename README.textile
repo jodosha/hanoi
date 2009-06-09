@@ -17,21 +17,6 @@ Prepare the target directory, you can use one of the following options:
   hanoi .
   hanoi /path/to/project
 
-This command will create the following structure:
-
-  Rakefile
-  test/
-    javascript/
-      assets/
-        jquery.js
-        testrunner.js
-        testsuite.css
-      example_test.js
-      fixtures/
-        example_fixtures.html
-      templates/
-        test_case.erb
-
 You need a valid "Rake":http://rake.rubyforge.org/ installation to run your tests:
 
   rake test:js
@@ -46,25 +31,80 @@ You can specify to run only certain tests:
 
 You can combine both @BROWSERS@ and @TESTS@ configurations.
 
+h2. Structure
+The @hanoi@ executable will create the following structure:
+
+  Rakefile
+  test/
+    javascript/
+      assets/
+        jquery.js
+        testrunner.js
+        testsuite.css
+      example_test.js
+      fixtures/
+        example_fixtures.html
+      templates/
+        test_case.erb
+
+* @Rakefile@ creates a fresh rakefile, edit it according to your setup
+* @test@ Hanoi creates it if missing, otherwise will choose between existing @test@ or @spec@ paths
+* @javascript@ is the root directory of your tests
+* @assets@ contains the jQuery and QUnit source file and a css.
+  Place your assets in this directory, it's mapped as root path @/@.
+* @example_test.js@ is a sample of a real test case.
+* @templates@ contains the template file for your tests. You shouldn't edit it, if you don't know the risk.
+* @fixtures@ contains all the HTML fixtures, each file will be injected into the proper case.
+
+By convention, your @test/javascript@ folder should reflect the structure of your source directory,
+appending the @_test.js@ suffix to each test case and the @_fixtures.html@ to each fixture file.
+
+Example:
+  
+  src/
+    directory_a/
+      directory_b/
+        file_3.js
+      file_2.js
+    file_1.js
+  test/
+    javascript/
+      directory_a/
+        directory_b/
+          file_3_test.js
+        file_2_test.js
+      file_1_test.js
+      fixtures/
+        directory_a/
+          directory_b/
+            file_3_fixtures.html
+        file_1_fixtures.html
+
+You have probably noticed that @file_2_fixtures.html@ is missing, this because fixtures are optional.
+
 h2. Browsers & Platforms
 
 Platforms:
-  # MacOS
-  # Windows
-  # Linux
+* MacOS
+* Windows
+* Linux
 
 Browsers:
-  # Firefox
-  # Safari
-  # Internet Explorer
-  # Opera
-  # Konqueror
+* Firefox
+* Safari
+* Internet Explorer
+* Opera
+* Konqueror
 
 h2. Acknowledgements
 
 The Ruby libraries of Hanoi are a customization of the jsblib.rb, courtesy of the "Prototype":http://prototypejs.org team.
 
 Hanoi runs a customized version of QUnit, courtesy of the "jQuery":http://jquery.com team.
+
+h2. Repository
+
+  git clone git://github.com/jodosha/hanoi.git
 
 h2. Copyright
 
