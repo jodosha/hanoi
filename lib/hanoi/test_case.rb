@@ -1,16 +1,16 @@
 class TestCase
   attr_reader :path
 
-  def initialize(path)
-    @path = path
+  def initialize(path, test_directory)
+    @path, @test_directory = path, test_directory
   end
-  
+
   def name
     @name ||= File.basename(@path, '.js')
   end
 
   def target
-    "/javascripts/#{name.gsub('_test', '')}.js"
+    "/javascripts/#{relative_path.gsub('_test', '')}"
   end
 
   def content
@@ -21,8 +21,20 @@ class TestCase
     File.exist?(path)
   end
 
+  def relative_path
+    @relative_path ||= @path.gsub("#{@test_directory}/", "")
+  end
+
   def url
-    "/test/#{name}.html"
+    "/test/#{relative_path.gsub('.js', '')}.html"
+  end
+
+  def create_temp_directory
+    FileUtils.mkdir_p temp_directory
+  end
+
+  def temp_directory
+    @temp_directory ||= File.dirname(File.expand_path(@path).gsub(@test_directory, "#{@test_directory}/tmp"))
   end
 
   # TODO enable

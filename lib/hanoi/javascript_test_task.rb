@@ -114,11 +114,12 @@ class JavaScriptTestTask < ::Rake::TaskLib
       create_temp_directory
       test_cases ||= Dir["#{test_directory}/**/*_test.js"] + Dir["#{test_directory}/**/*_spec.js"]
       test_cases.map do |test_case|
-        test_case = TestCase.new(test_case)
+        test_case = TestCase.new(test_case, test_directory)
         unless test_case.exist?
           destroy_temp_directory
           raise "Test case not found: '#{test_case.path}'"
         end
+        test_case.create_temp_directory
         write_template test_case
         test_case
       end
@@ -155,7 +156,7 @@ END
     def write_template(test_case)
       # instance var is needed by ERb binding.
       @test_case = test_case
-      template_path = "#{temp_directory}/#{test_case.name}.html"
+      template_path = "#{test_case.temp_directory}/#{test_case.name}.html"
       File.open(template_path, 'w') { |f| f.write(template.result(binding)) }
     end
 
