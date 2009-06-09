@@ -1,4 +1,5 @@
 class JavaScriptTestTask < ::Rake::TaskLib
+  BROWSERS = %w( safari firefox ie konqueror opera ).freeze
   attr_reader :sources_directory
 
   def initialize(name = :test)
@@ -62,17 +63,12 @@ class JavaScriptTestTask < ::Rake::TaskLib
     "http://localhost:4711#{test[:url]}?#{params}"
   end
 
-  def setup(sources_directory, test_cases)
+  def setup(sources_directory, test_cases, browsers)
     @sources_directory = sources_directory
-    test_cases = prepare_tests(test_cases)
+    test_cases = setup_tests(test_cases)
     run_test_cases(test_cases)
-    mount_paths
-  end
-
-  def mount_paths
-    mount "/",            assets_directory
-    mount "/test",        temp_directory
-    mount "/javascripts", sources_directory
+    setup_mount_paths
+    setup_browsers(browsers)
   end
 
   def mount(path, dir = nil)
@@ -109,8 +105,8 @@ class JavaScriptTestTask < ::Rake::TaskLib
     @browsers << browser
   end
 
-  private
-    def prepare_tests(test_cases)
+  protected
+    def setup_tests(test_cases)
       create_temp_directory
       test_cases ||= Dir["#{test_directory}/**/*_test.js"] + Dir["#{test_directory}/**/*_spec.js"]
       test_cases.map do |test_case|
@@ -122,6 +118,18 @@ class JavaScriptTestTask < ::Rake::TaskLib
         test_case.create_temp_directory
         write_template test_case
         test_case
+      end
+    end
+
+    def setup_mount_paths
+      mount "/",            assets_directory
+      mount "/test",        temp_directory
+      mount "/javascripts", sources_directory
+    end
+
+    def setup_browsers(browsers)
+      BROWSERS.each do |browser|
+        browser(browser.to_sym) unless browsers && !browsers.include?(browser)
       end
     end
 
