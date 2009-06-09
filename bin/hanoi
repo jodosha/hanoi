@@ -6,7 +6,8 @@ raise "Unknown path '#{path}'" unless File.directory?(path)
 templates_path = File.expand_path(File.dirname(__FILE__) + "/../templates")
 
 # Rakefile
-FileUtils.cp File.join(templates_path, "fresh_rakefile"), File.join(path, "Rakefile")
+File.open(File.join(path, "Rakefile"), "a") { |f| f.write(File.readlines(File.join(templates_path, "fresh_rakefile")))}
+
 
 # JavaScript test directory
 name = File.directory?(File.join(path, "spec")) ? "spec" : "test"
