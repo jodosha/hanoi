@@ -10,7 +10,6 @@ class TestCase
   end
 
   def target
-    # TODO make this configurable
     "/javascripts/#{name.gsub('_test', '')}.js"
   end
 

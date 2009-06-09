@@ -1,4 +1,6 @@
 class JavaScriptTestTask < ::Rake::TaskLib
+  attr_reader :sources_directory
+
   def initialize(name = :test)
     @name = name
     @tests = []
@@ -60,20 +62,21 @@ class JavaScriptTestTask < ::Rake::TaskLib
     "http://localhost:4711#{test[:url]}?#{params}"
   end
 
-  def setup(current_directory, test_cases)
-    @current_directory = current_directory
+  def setup(sources_directory, test_cases)
+    @sources_directory = sources_directory
     test_cases = prepare_tests(test_cases)
     run_test_cases(test_cases)
     mount_paths
   end
 
   def mount_paths
-    mount "/",     assets_directory
-    mount "/test", temp_directory
+    mount "/",            assets_directory
+    mount "/test",        temp_directory
+    mount "/javascripts", sources_directory
   end
 
   def mount(path, dir = nil)
-    dir = @current_directory + path unless dir
+    dir = current_directory + path unless dir
 
     # don't cache anything in our tests
     @server.mount(path, NonCachingFileHandler, dir)
@@ -127,14 +130,14 @@ class JavaScriptTestTask < ::Rake::TaskLib
 
     def test_directory
       @test_directory ||= begin
-        directory = File.directory?(File.expand_path(@current_directory + "/test")) ? "test" : "spec"
+        directory = File.directory?(File.expand_path(current_directory + "/test")) ? "test" : "spec"
         directory << "/javascript"
         unless File.directory?(directory)
 raise <<-END
-Can't find JavaScript test directory in '#{@current_directory}'.
+Can't find JavaScript test directory in '#{current_directory}'.
 Please make sure at least one of them exist:
-\t'#{@current_directory}/test/javascript'
-\t'#{@current_directory}/spec/javascript'\n
+\t'#{current_directory}/test/javascript'
+\t'#{current_directory}/spec/javascript'\n
 END
         end
         directory
@@ -156,6 +159,10 @@ END
       File.open(template_path, 'w') { |f| f.write(template.result(binding)) }
     end
 
+    def current_directory
+      @current_directory ||= Dir.pwd
+    end
+
     def create_temp_directory
       FileUtils.mkdir_p temp_directory
     end
@@ -169,6 +176,6 @@ END
     end
 
     def assets_directory
-      @assets_directory ||= File.expand_path(@current_directory + "/test/javascript/assets").freeze
+      @assets_directory ||= File.expand_path(current_directory + "/test/javascript/assets").freeze
     end
 end
