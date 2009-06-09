@@ -37,9 +37,9 @@ class TestCase
     @temp_directory ||= File.dirname(File.expand_path(@path).gsub(@test_directory, "#{@test_directory}/tmp"))
   end
 
-  # TODO enable
-  # def html_fixtures
-  #   path = "#{@plugin.root}/test/javascript/fixtures/#{type}/#{relative_path.gsub("_test.js", "_fixtures.html")}"
-  #   File.new(path).read rescue ""
-  # end
+  def html_fixtures
+    path = File.dirname(File.expand_path(@path).gsub(@test_directory, "#{@test_directory}/fixtures"))
+    path = File.expand_path(path + "/#{name.gsub('_test', '_fixtures.html')}")
+    File.new(path).read rescue ""
+  end
 end
