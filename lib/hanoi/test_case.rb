@@ -10,7 +10,7 @@ class TestCase
   end
 
   def target
-    "/javascripts/#{relative_path.gsub('_test', '')}"
+    "/javascripts/#{relative_path.gsub(/(_test|_spec)/, '')}"
   end
 
   def content
@@ -39,7 +39,7 @@ class TestCase
 
   def html_fixtures
     path = File.dirname(File.expand_path(@path).gsub(@test_directory, "#{@test_directory}/fixtures"))
-    path = File.expand_path(path + "/#{name.gsub('_test', '_fixtures.html')}")
+    path = File.expand_path(path + "/#{name.gsub(/(_test|_spec)/, '_fixtures.html')}")
     File.new(path).read rescue ""
   end
 end
