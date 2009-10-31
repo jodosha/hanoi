@@ -185,6 +185,12 @@ END
     end
 
     def assets_directory
-      @assets_directory ||= File.expand_path(current_directory + "/test/javascript/assets").freeze
+      @assets_directory ||= begin
+        path = File.expand_path(current_directory + "/test/javascript/assets")
+        return path if File.directory?(path)
+        path = File.expand_path(current_directory + "/spec/javascript/assets")
+        return path if File.directory?(path)
+        raise "Cannot find:\n\t#{File.expand_path(current_directory + "/test/javascript/assets")} or\n\t#{File.expand_path(current_directory + "/spec/javascript/assets")}"
+      end
     end
 end
