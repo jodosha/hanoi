@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name               = "hanoi"
-  s.version            = "0.0.1"
-  s.date               = "2009-06-09"
+  s.version            = "0.0.2"
+  s.date               = "2009-12-26"
   s.summary            = "Automated jQuery tests with QUnit"
   s.author             = "Luca Guidi"
   s.email              = "guidi.luca@gmail.com"
