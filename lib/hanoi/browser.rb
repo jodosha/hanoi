@@ -21,6 +21,37 @@ class Browser
     host.include?('linux')
   end
 
+  def visit(url)
+    if macos?
+      system("open -g -a #{path} '#{url}'")
+    elsif windows?
+      system("#{path} #{url}")
+    elsif linux?
+      system("#{name} #{url}")
+    end
+  end
+
+  def name
+    n = self.class.name.split('::').last
+    linux? ? n.downcase : n
+  end
+
+  def escaped_name
+    name.gsub(' ', '\ ')
+  end
+
+  def path
+    if macos?
+      File.expand_path("/Applications/#{escaped_name}.app")
+    else
+      @path
+    end
+  end
+
+  def to_s
+    name
+  end
+
   def applescript(script)
     raise "Can't run AppleScript on #{host}" unless macos?
     system "osascript -e '#{script}' 2>&1 >/dev/null"

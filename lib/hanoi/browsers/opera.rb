@@ -14,14 +14,10 @@ class Opera < Browser
       }
     end
   end
-  
-  def visit(url)
-    applescript('tell application "Opera" to GetURL "' + url + '"') if macos?
-    system("#{@path} #{url}") if windows? 
-    system("opera #{url}")  if linux?
-  end
 
-  def to_s
-    "Opera"
+  def visit(url)
+    applescript(%(tell application "#{name}" to GetURL "#{url}")) if macos?
+    system("#{@path} #{url}") if windows? 
+    system("#{name} #{url}")  if linux?
   end
 end

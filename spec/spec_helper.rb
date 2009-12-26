@@ -9,4 +9,15 @@ module Kernel
   end
 end
 
-class Browser; attr_reader :path end
+# TODO delegation
+def macos?
+  Browser.new.macos?
+end
+
+def windows?
+  Browser.new.windows?
+end
+
+def linux?
+  Browser.new.linux?
+end

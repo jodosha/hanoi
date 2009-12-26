@@ -16,7 +16,7 @@ class InternetExplorer < Browser
     end
   end
 
-  def to_s
+  def name
     "Internet Explorer"
   end
 end
