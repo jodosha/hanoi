@@ -10,6 +10,10 @@ describe "Chrome" do
     it "should be supported" do
       @browser.should be_supported
     end
+
+    it "return name" do
+      @browser.name.should == "Google Chrome"
+    end
   end
 
   describe "Mac OS X" do
@@ -18,10 +22,6 @@ describe "Chrome" do
     it "should have a path" do
       expected = File.expand_path("/Applications/#{@browser.escaped_name}.app")
       @browser.path.should == expected
-    end
-
-    it "return name" do
-      @browser.name.should == "Google Chrome"
     end
 
     it "should visit a given url" do
@@ -37,10 +37,6 @@ describe "Chrome" do
       @browser.path.should == File.join(ENV['ProgramFiles'] || 'c:\Program Files', '\Mozilla Chrome\firefox.exe')
     end
 
-    it "return name" do
-      @browser.name.should == "Google Chrome"
-    end
-
     it "should visit a given url" do
       Kernel.expects(:system).with("#{@browser.path} #{@url}")
       @browser.visit(@url)
@@ -49,7 +45,7 @@ describe "Chrome" do
 
   describe "Linux" do
     it "return name" do
-      @browser.name.should == "google chrome"
+      @browser.name.should == "Google Chrome"
     end
 
     it "should not be supported" do

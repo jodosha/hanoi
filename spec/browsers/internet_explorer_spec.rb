@@ -9,14 +9,14 @@ describe "InternetExplorer" do
     it "should not be supported" do
       @browser.should_not be_supported
     end
-  end
-
-  describe "Mac OS X" do
-    it_should_behave_like "Cross OS Internet Explorer"
 
     it "return name" do
       @browser.name.should == "Internet Explorer"
     end
+  end
+
+  describe "Mac OS X" do
+    it_should_behave_like "Cross OS Internet Explorer"
   end if macos?
 
   describe "Windows" do
@@ -39,9 +39,5 @@ describe "InternetExplorer" do
 
   describe "Linux" do
     it_should_behave_like "Cross OS Internet Explorer"
-
-    it "return name" do
-      @browser.name.should == "internet explorer"
-    end
   end if linux?
 end

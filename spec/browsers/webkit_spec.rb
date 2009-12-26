@@ -49,8 +49,6 @@ describe "Webkit" do
   end if windows?
 
   describe "Linux" do
-    it_should_behave_like "Cross OS Webkit"
-
     it "return name" do
       @browser.name.should == "webkit"
     end
