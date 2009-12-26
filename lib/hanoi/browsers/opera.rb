@@ -14,10 +14,4 @@ class Opera < Browser
       }
     end
   end
-
-  def visit(url)
-    applescript(%(tell application "#{name}" to GetURL "#{url}")) if macos?
-    system("#{@path} #{url}") if windows? 
-    system("#{name} #{url}")  if linux?
-  end
 end

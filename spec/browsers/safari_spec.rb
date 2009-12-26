@@ -9,21 +9,18 @@ describe "Safari" do
     it "should be supported" do
       @browser.should be_supported
     end
+
+    it "return name" do
+      @browser.name.should == "Safari"
+    end
+
+    it "should be kind of Webkit" do
+      @browser.should be_kind_of(Webkit)
+    end
   end
 
   describe "Mac OS X" do
     it_should_behave_like "Cross OS Safari"
-
-    it "should setup" do
-      @browser.expects(:applescript).with(%(tell application "#{@browser.name}" to make new document))
-      @browser.setup
-    end
-
-    it "should visit a given url" do
-      url = "http://localhost"
-      @browser.expects(:applescript).with(%(tell application "#{@browser.name}" to set URL of front document to "#{url}"))
-      @browser.visit(url)
-    end
   end if macos?
 
   describe "Windows" do

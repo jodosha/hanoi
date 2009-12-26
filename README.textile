@@ -94,10 +94,15 @@ h3. Platforms:
 h3. Browsers:
 
 * Firefox
+* Webkit
 * Safari
 * Internet Explorer
 * Opera
 * Konqueror
+
+h4. Webkit on Mac OS X
+
+Run `defaults write org.webkit.nightly.WebKit StartPageDisabled -bool YES` to solve the annoying start page issue.
 
 h2. Acknowledgements
 

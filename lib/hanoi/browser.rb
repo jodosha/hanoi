@@ -50,10 +50,5 @@ class Browser
 
   def to_s
     name
-  end
-
-  def applescript(script)
-    raise "Can't run AppleScript on #{host}" unless macos?
-    system "osascript -e '#{script}' 2>&1 >/dev/null"
-  end
+  end  
 end

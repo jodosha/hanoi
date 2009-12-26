@@ -1,5 +1,5 @@
 class JavaScriptTestTask < ::Rake::TaskLib
-  BROWSERS = %w( safari firefox ie konqueror opera ).freeze
+  BROWSERS = %w( safari firefox ie konqueror opera webkit ).freeze
   attr_reader :sources_directory
 
   def initialize(name = :test)
@@ -98,6 +98,8 @@ class JavaScriptTestTask < ::Rake::TaskLib
           Konqueror.new
         when :opera
           Opera.new
+        when :webkit
+          Webkit.new
         else
           browser
       end
