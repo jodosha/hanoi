@@ -34,7 +34,17 @@ describe "Chrome" do
     it_should_behave_like "Cross OS Chrome"
 
     it "should have a path" do
-      @browser.path.should == File.join(ENV['ProgramFiles'] || 'c:\Program Files', '\Mozilla Chrome\firefox.exe')
+      expected = File.join(
+        ENV['UserPath'] || ENV['UserProfile'] || "C:/Documents and Settings/Administrator",
+        "AppData",
+        "Local",
+        "Google",
+        "Chrome",
+        "Application",
+        "chrome.exe"
+      )
+
+      @browser.path.should == expected
     end
 
     it "should visit a given url" do
