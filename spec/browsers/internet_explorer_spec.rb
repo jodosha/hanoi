@@ -3,6 +3,7 @@ require File.join(File.dirname(__FILE__), "/../spec_helper")
 describe "InternetExplorer" do
   before :each do
     @browser = InternetExplorer.new
+    @url     = "http://localhost"
   end
 
   describe "Cross OS Internet Explorer", :shared => true do
