@@ -29,12 +29,14 @@ describe "InternetExplorer" do
     end
 
     it "should setup" do
-      # TODO test on windows
-      # Kernel.expects(:require).with('win32ole')
+      Kernel.expects(:require).with('win32ole')
       lambda { @browser.setup }.should_not raise_error
     end
 
-    it "should visit a given url"
+    it "should visit a given url" do
+      Kernel.expects(:system).with("#{@browser.path} #{@url}")
+      @browser.visit(@url)
+    end
   end if windows?
 
   describe "Linux" do
