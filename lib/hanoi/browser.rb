@@ -14,7 +14,7 @@ class Browser
   end
 
   def windows?
-    host.include?('mswin')
+    /mswin|mingw/.match host
   end
 
   def linux?

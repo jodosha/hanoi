@@ -13,7 +13,7 @@ describe "Browser" do
     method = case @browser.host
     when /darwin/
       :macos?
-    when /mswin/
+    when /mswin/, /mingw/
       :windows?
     when /linux/
       :linux?
