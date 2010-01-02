@@ -21,7 +21,11 @@ class Browser
   end
 
   def installed?
-    File.exist? path
+    if linux?
+      Kernel.system "which #{name}"
+    else
+      File.exist? path
+    end
   end
 
   def runnable?
