@@ -29,6 +29,16 @@ describe "InternetExplorer" do
       @browser.should be_supported
     end
 
+    it "should have a path" do
+      expected = File.join(
+        ENV['UserPath'] || ENV['UserProfile'] || "C:/Documents and Settings/Administrator",
+        "Internet Explorer",
+        "iexplore.exe"
+      )
+
+      @browser.path.should == expected
+    end
+
     it "should setup" do
       Kernel.expects(:require).with('win32ole')
       lambda { @browser.setup }.should_not raise_error
