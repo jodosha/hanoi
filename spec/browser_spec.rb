@@ -21,4 +21,20 @@ describe "Browser" do
 
     @browser.send(method).should be_true
   end
+
+  it "should check if installed" do
+    File.should_receive(:exist?).and_return true
+    @browser.should be_installed
+
+    File.should_receive(:exist?).and_return false
+    @browser.should_not be_installed
+  end
+
+  it "should check if runnable" do
+    File.should_receive(:exist?).and_return true
+    @browser.should be_runnable
+
+    File.should_receive(:exist?).and_return false
+    @browser.should_not be_runnable
+  end
 end

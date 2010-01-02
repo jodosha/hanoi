@@ -15,6 +15,14 @@ class Chrome < Browser
     windows? || macos?
   end
 
+  def installed?
+    if macos?
+      File.exist?("/Applications/#{name}.app")
+    else
+      super
+    end
+  end
+
   def name
     "Google Chrome"
   end

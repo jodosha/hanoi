@@ -1,8 +1,7 @@
 class Browser
   def supported?; true; end
-  def setup ; end
-  def open(url) ; end
-  def teardown ; end
+  def setup; end
+  def teardown; end
 
   def host
     require 'rbconfig'
@@ -19,6 +18,14 @@ class Browser
 
   def linux?
     host.include?('linux')
+  end
+
+  def installed?
+    File.exist? path
+  end
+
+  def runnable?
+    supported? && installed?
   end
 
   def visit(url)

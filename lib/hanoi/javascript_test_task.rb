@@ -29,7 +29,7 @@ class JavaScriptTestTask < ::Rake::TaskLib
 
       # run all combinations of browsers and tests
       @browsers.each do |browser|
-        if browser.supported?
+        if browser.runnable?
           t0 = Time.now
           test_suite_results = TestSuiteResults.new
 
@@ -47,7 +47,7 @@ class JavaScriptTestTask < ::Rake::TaskLib
           print test_suite_results
           browser.teardown
         else
-          puts "\nSkipping #{browser}, not supported on this OS."
+          puts "\nSkipping #{browser}, not supported on this OS or not installed."
         end
       end
 
