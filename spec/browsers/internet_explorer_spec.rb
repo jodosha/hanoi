@@ -29,14 +29,8 @@ describe "InternetExplorer" do
       @browser.should be_supported
     end
 
-    it "should have a path" do
-      expected = File.join(
-        ENV['UserPath'] || ENV['UserProfile'] || "C:/Documents and Settings/Administrator",
-        "Internet Explorer",
-        "iexplore.exe"
-      )
-
-      @browser.path.should == expected
+    it "should be runnable" do
+      @browser.should be_runnable
     end
 
     it "should setup" do

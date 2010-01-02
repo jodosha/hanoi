@@ -1,12 +1,4 @@
 class InternetExplorer < Browser
-  def initialize(path = nil)
-    @path = path || File.join(
-      ENV['UserPath'] || ENV['UserProfile'] || "C:/Documents and Settings/Administrator",
-      "Internet Explorer",
-      "iexplore.exe"
-    )
-  end
-
   def setup
     require 'win32ole' if windows?
   end
@@ -14,7 +6,11 @@ class InternetExplorer < Browser
   def supported?
     windows?
   end
-  
+
+  def runnable?
+    supported?
+  end
+
   def visit(url)
     if windows?
       ie = WIN32OLE.new('InternetExplorer.Application')
