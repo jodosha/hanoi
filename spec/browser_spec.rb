@@ -50,18 +50,18 @@ describe "Browser" do
 
   describe "Linux" do
     it "should check if installed" do
-      Kernel.expects(:system).with("which browser").and_return true
+      Kernel.should_receive(:system).with("which browser").and_return true
       @browser.should be_installed
 
-      Kernel.expects(:system).with("which browser").and_return false
+      Kernel.should_receive(:system).with("which browser").and_return false
       @browser.should_not be_installed
     end
 
     it "should check if runnable" do
-      Kernel.expects(:system).with("which browser").and_return true
+      Kernel.should_receive(:system).with("which browser").and_return true
       @browser.should be_runnable
 
-      Kernel.expects(:system).with("which browser").and_return false
+      Kernel.should_receive(:system).with("which browser").and_return false
       @browser.should_not be_runnable
     end
   end if linux?
