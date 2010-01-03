@@ -121,4 +121,4 @@ Hanoi runs a customized version of `QUnit`, courtesy of the [jQuery](http://jque
 
 ## Copyright
 
-(c) 2009 Luca Guidi - [http://lucaguidi.com](http://lucaguidi.com), released under the MIT license
+(c) 2009 - 2010 Luca Guidi - [http://lucaguidi.com](http://lucaguidi.com), released under the MIT license
