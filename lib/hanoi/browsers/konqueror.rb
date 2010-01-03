@@ -26,12 +26,4 @@ class Konqueror < Browser
       copy "#{@@konqueror_config}.bak", @@konqueror_config, :preserve => true, :verbose => false
     end
   end
-
-  def visit(url)
-    system("kfmclient openURL #{url}")
-  end
-
-  def to_s
-    "Konqueror"
-  end
 end
