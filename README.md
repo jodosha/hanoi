@@ -105,6 +105,10 @@ You have probably noticed that `file_2_fixtures.html` is missing, this because *
 
 To solve the annoying start page issue run: `defaults write org.webkit.nightly.WebKit StartPageDisabled -bool YES`
 
+#### Webkit on Windows
+
+Webkit hasn't a default path on Windows, please put under `C:\Program Files`, or specify the `WEBKIT_HOME` env var.
+
 ## Acknowledgements
 
 The Ruby libraries of Hanoi are a customization of the `jsblib.rb`, courtesy of the [Prototype](http://prototypejs.org) team.

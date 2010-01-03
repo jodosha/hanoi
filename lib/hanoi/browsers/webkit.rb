@@ -1,4 +1,8 @@
 class Webkit < Browser
+  def initialize(path = File.join(ENV['WEBKIT_HOME'] || ENV['ProgramFiles'] || 'C:\Program Files', 'Webkit', 'webkit.exe'))
+    @path = path
+  end
+
   def supported?
     macos? || windows?
   end

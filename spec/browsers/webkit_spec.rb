@@ -23,6 +23,10 @@ describe "Webkit" do
       @browser.setup
     end
 
+    it "should have a path" do
+      @browser.path.should == "/Applications/Webkit.app"
+    end
+
     it "should visit a given url" do
       url = "http://localhost"
       @browser.expects(:applescript).with(%(tell application "#{@browser.name}" to set URL of front document to "#{url}"))
@@ -40,6 +44,11 @@ describe "Webkit" do
     it "should setup" do
       @browser.should_not_receive(:applescript)
       @browser.setup
+    end
+
+    it "should have a path" do
+      expected = File.join(ENV['WEBKIT_HOME'] || ENV['ProgramFiles'] || 'C:\Program Files', 'Webkit', 'webkit.exe')
+      @browser.path.should == expected
     end
 
     it "should visit a given url" do
