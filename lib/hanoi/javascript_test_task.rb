@@ -31,7 +31,7 @@ class JavaScriptTestTask < ::Rake::TaskLib
       @browsers.each do |browser|
         if browser.runnable?
           t0 = Time.now
-          test_suite_results = TestSuiteResults.new
+          @test_suite_results = TestSuiteResults.new
 
           browser.setup
           puts "\nStarted tests in #{browser}."
@@ -40,11 +40,11 @@ class JavaScriptTestTask < ::Rake::TaskLib
             browser.visit(get_url(test))
             results = TestResults.new(@queue.pop.query, test[:url])
             print results
-            test_suite_results << results
+            @test_suite_results << results
           end
 
           print "\nFinished in #{Time.now - t0} seconds."
-          print test_suite_results
+          print @test_suite_results
           browser.teardown
         else
           puts "\nSkipping #{browser}, not supported on this OS or not installed."
@@ -54,6 +54,8 @@ class JavaScriptTestTask < ::Rake::TaskLib
       destroy_temp_directory
       @server.shutdown
       t.join
+
+      exit 1 if @test_suite_results.failure? || @test_suite_results.error?
     end
   end
 
