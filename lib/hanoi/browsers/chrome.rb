@@ -26,4 +26,10 @@ class Chrome < Browser
   def name
     "Google Chrome"
   end
+
+  def teardown
+    if macos?
+      system("killall #{escaped_name}")
+    end
+  end
 end

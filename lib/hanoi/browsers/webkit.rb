@@ -21,6 +21,10 @@ class Webkit < Browser
 
   def teardown
     #applescript('tell application "Safari" to close front document')
+
+    if macos?
+      system("killall #{escaped_name}")
+    end
   end
 
   private
